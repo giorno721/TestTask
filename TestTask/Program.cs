@@ -18,3 +18,10 @@ foreach (var customer in customersWithOnlyActiveDsl)
 {
     Console.WriteLine($"Customer with only active DSL products: {customer.Id}");
 }
+
+// task 2
+var overlappedTvProducts = queryService.GetOverlappingTvProducts();
+foreach (var product in overlappedTvProducts)
+{
+    Console.WriteLine($"Overlapping TV Product: {product.Id}, CustomerId: {product.CustomerId}");
+}

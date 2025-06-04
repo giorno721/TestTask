@@ -58,4 +58,46 @@ public class QueryService
 
         return result;
     }
+
+    public List<TvProducts> GetOverlappingTvProducts()
+    {
+        var now = DateTime.Now;
+        var result = new List<TvProducts>();
+
+        var activeTvProducts = _tvProducts
+            .Where(tv => DateTimeExtension.IsDateActive(tv.StartDate, tv.EndDate))
+            .ToList();
+
+        var customerGroups = activeTvProducts.GroupBy(tv => tv.CustomerId);
+
+        foreach (var group in customerGroups)
+        {
+            var customerTvProducts = group.ToList();
+
+            if (customerTvProducts.Count > 1)
+            {
+                for (int i = 0; i < customerTvProducts.Count; i++)
+                {
+                    for (int j = i + 1; j < customerTvProducts.Count; j++)
+                    {
+                        var product1 = customerTvProducts[i];
+                        var product2 = customerTvProducts[j];
+
+                        var end1 = product1.EndDate ?? DateTime.MaxValue;
+                        var end2 = product2.EndDate ?? DateTime.MaxValue;
+
+                        if (product1.StartDate < end2 && product2.StartDate < end1)
+                        {
+                            if (!result.Any(r => r.Id == product1.Id))
+                                result.Add(product1);
+                            if (!result.Any(r => r.Id == product2.Id))
+                                result.Add(product2);
+                        }
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
 }
