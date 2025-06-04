@@ -1,2 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using TestTask.Data;
+
+using var context = new ProductContext();
+context.Database.EnsureCreated();
