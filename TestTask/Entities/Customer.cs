@@ -1,4 +1,4 @@
-﻿namespace TestTask.Models;
+﻿namespace TestTask.Entities;
 
 public class Customer
 {
