@@ -1,6 +1,6 @@
 ﻿namespace TestTask.Helpers;
 
-public static class DateTimeExtension
+public static class DateTimeHelper
 {
     public static bool IsDateActive(DateTime? startDate, DateTime? endDate)
     {

@@ -25,3 +25,10 @@ foreach (var product in overlappedTvProducts)
 {
     Console.WriteLine($"Overlapping TV Product: {product.Id}, CustomerId: {product.CustomerId}");
 }
+
+//task 3
+var duplicateCustomers = queryService.GetDuplicateCustomerAccounts();
+foreach (var customer in duplicateCustomers)
+{
+    Console.WriteLine($"Customer TvProductId: {customer.CustomerIdTv}, Customer DslProductId: {customer.CustomerIdDsl} starts {customer.StartDate}");
+}
